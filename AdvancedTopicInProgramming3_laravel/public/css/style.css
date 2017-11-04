@@ -1,0 +1,134 @@
+
+.content-wrapper-height-create
+	{
+	   height: 750px; 
+	}
+
+.user-post {
+	width: 300px;
+	height: auto;
+	background: #ffffff;	 
+}
+.user-full-name {
+	color: black;
+}
+.post-time {
+	color: black;
+}
+.post-image img{
+	height: 200px;
+	width: 250px;
+	margin-left: 10px;
+	margin-top:20px;
+	margin-bottom: 10px; 
+}
+
+.book-info {
+	margin-top: 67px;
+}
+.individual-book {
+	margin-top: 20px;
+}
+.book-title ul li{
+	display: inline-block;
+	margin-right: 20px;
+}
+
+.advertiser-profile-image img {
+	width: 90px;
+	height: 90px;
+	margin: 20px;
+}
+
+.details-imgae-part {
+	margin-top: 30px;
+	background: white;
+}
+.post-image-details img {
+	margin-left: 100px;
+	width: 283px;
+	margin-top: 20px;
+}
+.advertiser-info {
+	margin-left: 128px;
+	margin-top: -75px;
+}
+
+.panel-wrapper{
+	margin-top: 20px;
+}
+
+.book-title,.book-price,.book-purchase-time,.book-edition,.request-info {
+	font-size: 20px;
+	margin:15px;
+}
+.book-price span,.book-title span,.book-purchase-time span,.book-edition span{
+	color: red;
+}
+.request-info-message {
+	margin-right: 30px;
+}
+
+.request-info a {
+	padding: 8px;
+	font-size: 19px;
+}
+
+.owl-carousel {
+	background: #ffffff;
+	margin-top: 70px;
+}
+
+.related-books h4 {
+	margin-top: 38px;
+	color: red;
+	font-size: 42px;
+}
+
+.advertise-list{
+  background: white;
+  margin-top: 20px;
+}
+.after-container {
+    padding-top: 12px;
+}
+.addvertise-from {
+	background: #ffffff;
+	margin-top: 10px;
+	padding: 20px;
+}
+
+.content-wrapper-height{
+    height: 600px;
+}
+
+.space {
+    margin-left: 10px;
+}
+
+.from-wrapper {
+    background: #ffa64d;
+    padding: 20px;
+    color: #000000;
+}
+
+.single-wrapper {
+	background: #ffffff;
+	padding: 20px;
+	font-size: 15px;
+}
+
+.right .direct-chat-text {
+	margin-right: 8px;
+	float: right;
+}
+.direct-chat-text {
+	border-radius: 5px;
+	position: relative;
+	padding: 5px 10px;
+	background: #d2d6de;
+	border: 1px solid #d2d6de;
+	margin: 5px 0 0 50px;
+	color: #444;
+	width: 291px;
+}
