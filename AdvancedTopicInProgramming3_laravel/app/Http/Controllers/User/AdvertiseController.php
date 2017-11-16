@@ -95,7 +95,9 @@ class AdvertiseController extends Controller
     public function show($id)
     {
         $advertise = Advertise::where('id',$id)->first();
-        $count     = RequestTrack::where('AdvertiseId',$id)->count();
+        $count     = RequestTrack::where('AdvertiseId',$id)
+                                  ->where('Status','pending')
+                                  ->count();
         
         return view('user.advertise-details',compact('advertise','count'));
         
@@ -164,4 +166,5 @@ class AdvertiseController extends Controller
         $advertise->delete();
         return back();
     }
+    
 }

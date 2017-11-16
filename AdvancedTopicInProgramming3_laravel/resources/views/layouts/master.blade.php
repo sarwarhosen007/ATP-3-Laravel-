@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <html>
-
+    
    @include('layouts.head')
 
 <body class="hold-transition skin-blue sidebar-mini">

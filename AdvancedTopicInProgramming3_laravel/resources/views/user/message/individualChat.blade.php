@@ -1,5 +1,8 @@
 @extends('layouts.master')
 
+@section('title')
+  Individual Message
+@endsection
   @section('main-content')
 
       <div class="content-wrapper">
@@ -13,11 +16,14 @@
                   <h3 class="box-title">Community Member</h3>
                 </div>
                 <div class="box-body no-padding">
-                  <ul class="nav nav-pills nav-stacked">
+                  <ul id="main-menu-list" class="nav nav-pills nav-stacked">
 
                     @if(count($userInfo) > 0)
                       @foreach($userInfo as $user)
-                        <li><a href="{{ route('message.show',$user->id) }}"></i> 
+                        @php
+                          $url = 'user/message/'. $user->id  .'/edit';
+                        @endphp
+                        <li class="{{ Request::is($url) ? 'active' : $url }}" ><a href="{{ route('message.edit',$user->id) }}"></i> 
                             {{ $user->name }}
                           </a></li>
                       @endforeach
@@ -35,18 +41,6 @@
                   <h3 class="box-title">Inbox</h3>
                      <!-- DIRECT CHAT PRIMARY -->
           <div class="box box-primary direct-chat direct-chat-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title">Direct Chat</h3>
-
-              <div class="box-tools pull-right">
-                <span data-toggle="tooltip" title="3 New Messages" class="badge bg-light-blue">3</span>
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="Contacts" data-widget="chat-pane-toggle">
-                  <i class="fa fa-comments"></i></button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-              </div>
-            </div>
             <!-- /.box-header -->
             <div class="box-body">
               <!-- Conversations are loaded here -->
@@ -60,16 +54,20 @@
                        $email = explode("-", $Message->conversitionLevel);
 
                      @endphp
-
           
                     @if(Auth::user()->email != $email[1])
 
                       <div class="direct-chat-msg">
                         <div class="direct-chat-info clearfix">
-                          <span class="direct-chat-name pull-left">Mahi</span>
+                          <span class="direct-chat-name pull-left">{{ $individualUser }}</span>
                         </div>
-                        <!-- /.direct-chat-info -->
-                        <img class="direct-chat-img" src="{{ asset('images/profile/mahi.jpg') }}" alt="Message User Image"><!-- /.direct-chat-img -->
+
+                         @if(Session::get('image') != null)
+                            <img src="{{ Storage::disk('local')->url(Session::get('image')) }}" class="direct-chat-img img-circle" alt="User Image">
+                          @else
+                            <img src="{{ asset('images/profile/image-1.jpeg') }}" class="img-circle direct-chat-img" alt="User Image">
+                          @endif
+
                         <div class="direct-chat-text">
                           {{ $Message->messageBody }}
                         </div>
@@ -80,9 +78,15 @@
 
                       <div class="direct-chat-msg right">
                           <div class="direct-chat-info clearfix">
-                            <span class="direct-chat-name pull-right">Sarwar Hosen</span>                     
+                            <span class="direct-chat-name pull-right">Me</span>                     
                           </div>
-                          <img class="direct-chat-img" src="{{ asset('images/profile/mahi.jpg') }}" alt="Message User Image">
+
+                          @if(Auth::user()->image != null)
+                            <img src="{{ Storage::disk('local')->url(Auth::user()->image) }}" class="direct-chat-img img-circle" alt="User Image">
+                          @else
+                            <img src="{{ asset('images/profile/image-1.jpeg') }}" class="img-circle direct-chat-img" alt="User Image">
+                          @endif
+
                           <div class="direct-chat-text" style="margin-right: 8px;">
                             {{ $Message->messageBody }}
                           </div>

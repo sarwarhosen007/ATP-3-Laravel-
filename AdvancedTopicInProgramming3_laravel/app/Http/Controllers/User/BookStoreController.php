@@ -19,10 +19,8 @@ class BookStoreController extends Controller
 
         $advertises = DB::table('advertises')
             ->join('users', 'advertises.userEmail', '=', 'users.email')
-            ->select('advertises.*', 'users.name')
+            ->select('advertises.*', 'users.name','users.image')
             ->get();
-
-     	//$advertises = Advertise::paginate(6);
       
      	return view('user.bookstore.index',compact('advertises'));
      }
@@ -79,6 +77,8 @@ class BookStoreController extends Controller
         $notification->SenderEmail  = $SenderEmail;
         $notification->ReciverEmail = $RecevierEmail;
         $notification->body         = "send request";
+        $notification->status       = "pending";
+
 
         $requestTrack->save();
         $notification->save();
@@ -89,6 +89,18 @@ class BookStoreController extends Controller
 
 
      }
+
+     public function bookSearch(Request $request){
+
+        $advertises = Advertise::where('department',$request->department)
+                        ->where('bookTitle', 'like', $request->BookTitle.'%')
+                        ->get();
+
+        return view('user.bookstore.search')->with('advertises',$advertises);
+     }
+
+
+
 
 
 }

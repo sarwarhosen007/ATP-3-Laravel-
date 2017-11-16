@@ -14,9 +14,23 @@
 					<div class="col-lg-4">
 						@include('message.success')
 					</div>
-					<div class="col-md-4  col-md-offset-2">
+					<div class="col-md-4 ">
 						<div class="sendername">
-							<b>Name: </b><span>{{ $senderInfo->name }}</span>
+							 
+							 <div class="form-group">
+	                           <span>Name: </span><span>{{ $senderInfo->name }}</span><br><br>
+	                           <span>Email: </span><span>{{ $senderInfo->email }}</span><br><br>
+	                           <span>Profile Image:</span><br><br>
+
+	                          @if($senderInfo->image != null)
+
+	                            <img src="{{ Storage::disk('local')->url($senderInfo->image) }}" alt="" style=" height: 100px">
+	                            @else
+
+	                               <img src="{{ asset('images/profile/image-1.jpeg') }}" alt="">
+	                          @endif
+		 
+		                    </div>
 						</div>
 					</div>
 	              <div class="col-lg-12">

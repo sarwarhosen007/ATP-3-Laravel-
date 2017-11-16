@@ -12,8 +12,11 @@ class NotificationController extends Controller
 {
     public function list()
     {
-      $notificationList = Notification::where('ReciverEmail',Auth::user()->email)
-      					  ->where('status','!=','delete')
+
+
+      $notificationList = Notification::where('SenderEmail',Auth::user()->email)
+      					  ->where('Status','=','reject')
+                  ->orWhere('Status','=','accept')
       					  ->get();
 
       return view('user.notification.notificationList',compact('notificationList'));
@@ -23,7 +26,7 @@ class NotificationController extends Controller
     public function delete(Request $request,$id)
     {
     	$notification = Notification::find($id);
-    	$notification->status = "delete";
+    	$notification->status = "remove";
     	$notification->save();
 
     	$request->session()->flash('deleteNotification', "Notification Delete Successfully");

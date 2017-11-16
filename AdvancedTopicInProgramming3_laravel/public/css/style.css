@@ -1,4 +1,8 @@
-
+.skin-blue .sidebar-form {
+	border-radius: 3px;
+	 border:0px; 	
+	margin: 10px 10px;
+}
 .content-wrapper-height-create
 	{
 	   height: 750px; 
@@ -131,4 +135,13 @@
 	margin: 5px 0 0 50px;
 	color: #444;
 	width: 291px;
+}
+
+.user-info {
+	margin-top: 4px;
+	margin-bottom: 14px;
+}
+.material-charts-chart-title {
+	 
+	display: none;
 }

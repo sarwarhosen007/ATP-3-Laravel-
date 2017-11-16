@@ -1,7 +1,7 @@
 
   <header class="main-header">
     <a href="index2.html" class="logo">
-      <span class="logo-lg"><b>Admin</b>LTE</span>
+      <span class="logo-lg"><b>OldBookStore</span>
     </a>
     <nav class="navbar navbar-static-top" role="navigation">
       <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
@@ -12,29 +12,30 @@
           <li class="dropdown messages-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-envelope-o"></i>
-              <span class="label label-success">4</span>
+              <span class="label label-success">{{ count(Session::get('messageList')) }}</span>
             </a>
             <ul class="dropdown-menu">
-              <li class="header">You have 4 messages</li>
-              <li>
-                <ul class="menu">
-                  <li>
-                    <a href="#">
-                      <div class="pull-left">
-                        <img src="{{ asset('images/profile/mahi.jpg') }}" class="img-circle" alt="User Image">
-                      </div>
-                      <h4>
-                        Mahi
-                        <small><i class="fa fa-clock-o"></i> 5 mins</small>
-                      </h4>
-                      <p>I Want to Buy Your Book</p>
-                    </a>
-                  </li>
-                  </ul>
+                       <li class="header">You have 4 messages</li>
+                       <li>
+                         <ul class="menu">
+                           <li>
+                             <a href="#">
+                               <div class="pull-left">
+                     
+                                 <img src="{{ asset('images/profile/mahi.jpg') }}" class="img-circle" alt="User Image">
+                               </div>
+                               <h4>
+                                 Mahi
+                                 <small><i class="fa fa-clock-o"></i> 5 mins</small>
+                               </h4>
+                               <p>I Want to Buy Your Book</p>
+                             </a>
+                           </li>
+                           </ul>
+                       </li>
+                       <li class="footer"><a href="#">See All Messages</a></li>
+                     </ul>
               </li>
-              <li class="footer"><a href="#">See All Messages</a></li>
-            </ul>
-          </li>
           <li class="dropdown notifications-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-bell-o"></i>
@@ -58,12 +59,21 @@
          
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="{{ asset('images/profile/image-1.jpeg') }}" class="user-image" alt="User Image">
+              @if(Auth::user()->image != null)
+                <img src="{{ Storage::disk('local')->url(Auth::user()->image) }}" class="user-image" alt="User Image">
+              @else
+                <img src="{{ asset('images/profile/image-1.jpeg') }}" class="user-image" alt="User Image">
+              @endif
               <span class="hidden-xs">{{ Auth::user()->name }} </span>
             </a>
             <ul class="dropdown-menu">
               <li class="user-header">
-                <img src="{{ asset('images/profile/image-1.jpeg') }}" class="img-circle" alt="User Image">
+
+                @if(Auth::user()->image != null)
+                  <img src="{{ Storage::disk('local')->url(Auth::user()->image) }}" class="img-circle" alt="User Image">
+                @else
+                  <img src="{{ asset('images/profile/image-1.jpeg') }}" class="img-circle" alt="User Image">
+                @endif
 
                 <p>
                   {{ Auth::user()->name }}
@@ -73,7 +83,7 @@
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
+                  <a href="{{ route('porfileSetting.showProfile') }}" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
                   <a href="{{ route('logout') }}" class="btn btn-default btn-flat">Sign out</a>

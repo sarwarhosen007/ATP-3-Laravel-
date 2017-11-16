@@ -7,15 +7,29 @@
 
       <section class="container-fluid">
        <!-- Search Bar for book Serarch -->
-            <form action="#" method="get" class="sidebar-form">
-              <div class="input-group">
-                <input type="text" name="q" class="form-control" placeholder="Enter Book Title here....">
-                <span class="input-group-btn">
-                    <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                    </button>
-                  </span>
+            <form action="{{ route('bookSearch') }}" method="post" class="sidebar-form">
+
+              {{ csrf_field() }}
+
+              <div class="col-md-2">
+                  <select class="form-control" name="department">
+                    <option value="CSSE">CSSE</option>
+                    <option value="BBA">BBA</option>
+                    <option value="CSE">CSE</option>
+                    <option value="EEE">EEE</option>
+                  </select>
+              </div>
+              <div class="col-md-9">
+                <div class="input-group">
+                  <input type="text" name="BookTitle" {{ old('BookTitle') }} class="form-control" placeholder="Enter Book Title here...." required="">
+                  <span class="input-group-btn">
+                      <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                      </button>
+                    </span>
+                </div>
               </div>
            </form>
+
           <!-- /.End Book Search Bar -->
       </section>
     
@@ -30,7 +44,12 @@
                 <div class="user-post">
                   <div class="user-panel">
                     <div class="pull-left image">
-                      <img src="{{ asset('images/profile/mahi.jpg') }}" class="img-circle" alt="User Image">
+
+                      @if($advertise->image != null)
+                        <img src="{{ Storage::disk('local')->url($advertise->image) }}" class="user-image" alt="User Image">
+                      @else
+                        <img src="{{ asset('images/profile/image-1.jpeg') }}" class="user-image" alt="User Image">
+                      @endif
                     </div>
                     <div class="pull-left info">
                       <p class="user-full-name">{{ $advertise->name }}</p> 

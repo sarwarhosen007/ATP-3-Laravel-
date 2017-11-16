@@ -2,9 +2,6 @@
 
 @section('head-extra-css')
 
-  <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }}">
-  <link rel="stylesheet" href="{{ asset('css/owl.theme.default.css') }}">
-
 @endsection
 
   @section('main-content')
@@ -14,7 +11,14 @@
           <div class="col-md-6">
               <div class="details-imgae-part">
                 <div class="advertiser-profile-image">
-                  <img src="{{ asset('images/profile/mahi.jpg') }}" class="img-circle" alt="User Image">
+                  @if(Auth::user()->image != null)
+
+                     <img src="{{ Storage::disk('local')->url($userInfo->image) }}" class="img-circle" alt="User Image">
+
+                  @else
+                     <img src="{{ asset('images/profile/mahi.jpg') }}" class="img-circle" alt="User Image">
+                  @endif
+
                 </div>
                   <div class="advertiser-info">
                     <p class="user-full-name">{{ $userInfo->name }}</p> 
@@ -89,62 +93,8 @@
           </div>
       </div>
     </section>
-    <section class="container-fluid">
-
-       <div class="row text-center">
-         <div class="col-lg-12">
-           <div class="related-books">
-             <h4>Related Books</h4>
-           </div>
-          
-             <div class="owl-carousel owl-theme">
-                 @if(count($relatedBooks) > 0)
-                  @foreach($relatedBooks->all() as $relatedBook)
-
-                    <div class="item">                 
-                      <div class="related-book">
-                              <div class="book-title text-center">
-                            <a href="{{ route('bookstore.details',$relatedBook->id) }}">{{ $relatedBook->bookTitle }}</a>
-                            </div>
-                            <div class="post-image">
-                              <a href="#"><img src="{{ Storage::disk('local')->url($relatedBook->bookImage) }}" alt="User Image"></a>
-                            </div>
-                            <div class="book-title">
-                               <ul>
-                                 <li><b>Price: </b><span>{{ $relatedBook->bookPrice }}tk</span></li>
-                                 <li><a href="{{ route('bookstore.details',$relatedBook->id) }}" class="btn btn-info btn-sm">See Details</a></li>
-                               </ul>
-                            </div>
-                       </div>
-                    </div>
-
-                  @endforeach
-                @endif
-            </div>
-         </div>
-       </div>
-    </section>
  </div>
   @endsection
 
   @section('footer-extra-js')
-    <script src="{{ asset("js/owl.carousel.min.js") }}" type="text/javascript"></script>
-    <script>
-       $('.owl-carousel').owlCarousel({
-        loop:true,
-        margin:10,
-        nav:true,
-        responsive:{
-            0:{
-                items:1
-            },
-            600:{
-                items:3
-            },
-            1000:{
-                items:5
-            }
-        }
-      });
-    </script>
   @endsection

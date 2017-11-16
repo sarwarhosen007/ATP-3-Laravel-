@@ -9,7 +9,7 @@
 		             <div class="row">
 		             	<div class="col-md-4">
 		             		<div class="advertise-image">
-		             			<img src="{{ Storage::disk('local')->url($advertise->bookImage) }}" alt="">
+		             			<img src="{{ Storage::disk('local')->url($advertise->bookImage) }}" alt="" style="width: 100px;height: 200px;">
 		             		</div>
 		             	</div>
 		             	<div class="col-md-6">
@@ -32,7 +32,7 @@
 						       <span>Price: <b>{{ $advertise->bookPrice }} tk</b></span>
 						    </div>
 						    <div class="form-group">
-						    	<a  href="#" class="btn btn-primary btn-sm">Requests <span class="badge">{{ $count }}</span></a>
+						    	<a  href="{{ route('requestDetails',$advertise->id) }}" class="btn btn-primary btn-sm">Requests <span class="badge">{{ $count }}</span></a>
 						    	<a href="{{ route('advertise.edit',$advertise->id) }}" class="btn btn-success btn-sm">Edit</a>
 						    	<a href="{{ route('advertise.index') }}" class="btn btn-info btn-sm">Back To List</a>
 						    </div>

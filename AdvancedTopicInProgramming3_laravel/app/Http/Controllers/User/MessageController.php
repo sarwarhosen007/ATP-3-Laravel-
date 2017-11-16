@@ -8,6 +8,8 @@ use App\User;
 use Auth;
 use App\Model\UserConversionTrack;
 use App\Model\Message;
+use DB;
+use Session;
 
 class MessageController extends Controller
 {
@@ -18,9 +20,16 @@ class MessageController extends Controller
      */
     public function index()
     {
-        $userInfo = User::where('email','!=',Auth::user()->email)->get();
+        $userInfo = User::where('email','!=',Auth::user()->email)
+                         ->where('type',null)
+                         ->get();
 
-         return view('user.message.message',compact('userInfo'));
+        $users = DB::table('user_conversion_tracks')
+                                  ->where('SerderEmail',Auth::user()->email)
+                                  ->orWhere('ReciverEmail',Auth::user()->email)
+                                  ->get();
+         
+        return view('user.message.message',compact('userInfo'));
     }
 
     /**
@@ -66,6 +75,7 @@ class MessageController extends Controller
         // find paticipant Email From User Table
 
         $individualUser = User::find($id);
+        Session::put('image',$individualUser->image);
 
         // find convertions id from convertion_track table
 
@@ -90,17 +100,15 @@ class MessageController extends Controller
         $AuthUserMessageList = Message::where('conversitionLevel',$convertionLevelAuthUser)
                                         ->orWhere('conversitionLevel',$PartnerconvertionLevel)
                                         ->get();
-       //$partnerMessageList = Message::where('conversitionLevel',$PartnerconvertionLevel)->get();
-
-    
-
-        $userInfo = User::where('email','!=',Auth::user()->email)->get();
+        $userInfo = User::where('email','!=',Auth::user()->email)
+                            ->where('type',null)
+                            ->get();
 
         return view('user.message.individualChat')
                     ->with('userInfo',$userInfo)
                     ->with('id',$id)
-                    ->with('AuthUserMessageList',$AuthUserMessageList);
-                    //->with('partnerMessageList',$partnerMessageList);
+                    ->with('AuthUserMessageList',$AuthUserMessageList)
+                    ->with('individualUser',$individualUser->name);
         
     }
 

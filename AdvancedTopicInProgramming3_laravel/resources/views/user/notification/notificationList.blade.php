@@ -31,9 +31,9 @@
 		                                @foreach($notificationList as $notification) 
 			                                 <tr>
 			                                    <td>{{ $loop->iteration }}</td>
-			                                  	<td>{{ $notification->SenderEmail }}</td>
+			                                  	<td>{{ $notification->ReciverEmail }}</td>
 			                                  	<td>{{ $notification->created_at->diffForHumans() }}</td>
-			                                  	<td>{{ $notification->body }}</td>
+			                                  	<td>Your Request {{ $notification->status }}</td>
 			                                  	<td>
 			                                  		<a href="{{ route('notification.delete',$notification->id) }}" class="btn btn-danger btn-sm">Delete</a>
 			                                  	</td>
