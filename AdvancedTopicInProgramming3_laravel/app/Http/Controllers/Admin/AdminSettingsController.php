@@ -79,6 +79,7 @@ class AdminSettingsController extends Controller
          	$request->session()->flash('message', 'Please Select Valid Image');
          	return redirect()->back();
          }
+         
 
         $user = User::where("email",Session::get('email'))->first();
         $user->image = $imageName;
